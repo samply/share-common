@@ -1,0 +1,220 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>de.samply</groupId>
+        <artifactId>parent</artifactId>
+        <version>11.1.0</version>
+    </parent>
+
+    <artifactId>share-common</artifactId>
+    <version>4.0.0</version>
+
+    <name>Samnply Share Common</name>
+    <description>Samply Share Common Components</description>
+    <url>https://github.com/samply/share-common</url>
+    <organization>
+        <name>Samply Community</name>
+    </organization>
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Deniz Tas</name>
+            <email>d.tas@dkfz-heidelberg.de</email>
+            <organization>German Cancer Research Center</organization>
+            <organizationUrl>https://www.dkfz.de/en/</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/samply/share-common.git</connection>
+        <developerConnection>scm:git:https://github.com/samply/share-common.git</developerConnection>
+        <url>https://github.com/samply/share-common</url>
+    </scm>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
+    <properties>
+        <skipTests>false</skipTests>
+
+        <version.samply.common.config>5.1.0</version.samply.common.config>
+        <mdrfaces.version>4.0.0</mdrfaces.version>
+        <auth-dto.version>5.1.0</auth-dto.version>
+        <share-dto.version>5.0.0</share-dto.version>
+
+        <!-- general dependencies -->
+        <omnifaces.version>1.14.1</omnifaces.version>
+        <joda-time.version>2.9.9</joda-time.version>
+        <httpclient.version>4.5.5</httpclient.version>
+
+        <!-- webjars -->
+        <bootstrap.version>3.3.7-1</bootstrap.version>
+        <animate.css.version>3.5.2</animate.css.version>
+        <jquery-blockui.version>2.70</jquery-blockui.version>
+        <metisMenu.version>2.7.0</metisMenu.version>
+        <bootstrap-datepicker.version>1.8.0</bootstrap-datepicker.version>
+        <datatables.version>1.10.16</datatables.version>
+
+        <!-- JUnit testing -->
+        <junit-jupiter.version>5.6.0</junit-jupiter.version>
+        <junit-platform.version>1.1.0</junit-platform.version>
+        <hamcrest-library.version>2.2</hamcrest-library.version>
+
+        <nexus-staging-maven-plugin.version>1.6.7</nexus-staging-maven-plugin.version>
+        <jsf-api.version>2.2.15</jsf-api.version>
+        <jsf-impl.version>2.2.15</jsf-impl.version>
+        <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
+        <slf4j-api.version>1.7.25</slf4j-api.version>
+        <commons-io.version>2.6</commons-io.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>de.samply</groupId>
+            <artifactId>common-config</artifactId>
+            <version>${version.samply.common.config}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.faces</groupId>
+            <artifactId>jsf-api</artifactId>
+            <scope>provided</scope>
+            <version>${jsf-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.faces</groupId>
+            <artifactId>jsf-impl</artifactId>
+            <scope>provided</scope>
+            <version>${jsf-impl.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
+            <version>${javax.servlet-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>de.samply</groupId>
+            <artifactId>mdrfaces</artifactId>
+            <version>${mdrfaces.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>de.samply</groupId>
+            <artifactId>auth-dto</artifactId>
+            <version>${auth-dto.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.omnifaces</groupId>
+            <artifactId>omnifaces</artifactId>
+            <version>${omnifaces.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>${bootstrap.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>de.samply</groupId>
+            <artifactId>share-dto</artifactId>
+            <version>${share-dto.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${joda-time.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${httpclient.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>animate.css</artifactId>
+            <version>${animate.css.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery-blockui</artifactId>
+            <version>${jquery-blockui.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>metisMenu</artifactId>
+            <version>${metisMenu.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap-datepicker</artifactId>
+            <version>${bootstrap-datepicker.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>datatables</artifactId>
+            <version>${datatables.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
+        </dependency>
+
+        <!-- Dependencies for JUnit testing -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit-jupiter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit-jupiter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <version>${junit-platform.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-library</artifactId>
+            <version>${hamcrest-library.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/webapp/resources</directory>
+                <targetPath>META-INF/resources</targetPath>
+            </resource>
+            <resource>
+                <directory>src/main/webapp/WEB-INF/</directory>
+                <targetPath>META-INF</targetPath>
+            </resource>
+        </resources>
+    </build>
+
+</project>

@@ -1,0 +1,183 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+                xmlns:ssc="http://xmlns.jcp.org/jsf/composite/samply-share-common"
+                xmlns:pass="http://xmlns.jcp.org/jsf/passthrough">
+
+    <cc:interface>
+
+    </cc:interface>
+
+    <cc:implementation>
+        <div class="listHeader">#{cc.resourceBundleMap.searchMDR}</div>
+
+        <h:form>
+
+            <h:panelGroup id="searchPanel" layout="block"
+                          binding="#{ItemSearchController.searchPanel}">
+
+                <div class="input-group" style="margin-top: 15px; width: 100%;">
+                    <h:inputText value="#{ItemSearchController.searchText}"
+                                 styleClass="form-control"></h:inputText>
+                    <span class="input-group-btn">
+                    <h:commandButton value="#{cc.resourceBundleMap.search}"
+                                     onclick="$(this).button('loading');"
+                                     pass:data-loading-text="#{cc.resourceBundleMap.searching}..."
+                                     action="#{ItemSearchController.onSearch()}"
+                                     styleClass="btn btn-default btn-primary searchButton"
+                                     type="button">
+                        <i class="fa fa-search"></i> Filter
+                    <f:ajax execute="@form" render="@none"/>
+                    </h:commandButton>
+                </span>
+                </div>
+                <br/>
+
+                #{ItemSearchController.resetMenuItems()}
+                <h:panelGroup id="itemNavigationPanel" layout="block"
+                              binding="#{ItemSearchController.itemNavigationPanel}"
+                              class="itemNavigationPanel">
+                    <ul class="nav multiLevelMenu">
+
+                        <li class=""><a href="#" class="searchMdrGroup"><i
+                                class="fa fa-indent searchMdrGroupIcon"></i>#{cc.resourceBundleMap.groups}
+                        </a>
+                            <ul class="nav nav-second-level collapse" style="height: 0px;">
+                                <li>
+                                    <div class="formItem draggableItem addable" draggable="true">
+                                        <input type="hidden" id="mdrId" value="conjunctionGroup"/>
+                                        <div class="designation">#{cc.resourceBundleMap.group}</div>
+                                        <div class="definition">#{cc.resourceBundleMap.groupDefinition}</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- MDR Items -->
+                        <ui:repeat value="#{ItemSearchController.menuItems}" var="menuItemA">
+                            <li class="#{menuItemA.liStyleClass}"><ssc:formItem
+                                    mdrId="#{menuItemA.mdrId}"
+                                    designation="#{menuItemA.designation}"
+                                    definition="#{menuItemA.definition}"
+                                    enumElementType="#{menuItemA.enumElementType}"
+                                    aStyleClass="#{menuItemA.aStyleClass}"
+                                    iStyleClass="#{menuItemA.iStyleClass}"
+                                    searchString="#{menuItemA.searchString}"></ssc:formItem>
+                                <ul class="nav nav-third-level collapse">
+                                    <!-- third level -->
+                                    <ui:repeat value="#{menuItemA.children}" var="menuItemB">
+                                        <li class="#{menuItemB.liStyleClass}"><ssc:formItem
+                                                mdrId="#{menuItemB.mdrId}"
+                                                designation="#{menuItemB.designation}"
+                                                definition="#{menuItemB.definition}"
+                                                enumElementType="#{menuItemB.enumElementType}"
+                                                aStyleClass="#{menuItemB.aStyleClass}"
+                                                iStyleClass="#{menuItemB.iStyleClass}"
+                                                searchString="#{menuItemb.searchString}"></ssc:formItem>
+                                            <ul class="nav nav-fourth-level collapse">
+                                                <!-- fourth level -->
+                                                <ui:repeat value="#{menuItemB.children}"
+                                                           var="menuItemC">
+                                                    <li class="#{menuItemC.liStyleClass}">
+                                                        <ssc:formItem mdrId="#{menuItemC.mdrId}"
+                                                                      designation="#{menuItemC.designation}"
+                                                                      definition="#{menuItemC.definition}"
+                                                                      enumElementType="#{menuItemC.enumElementType}"
+                                                                      aStyleClass="#{menuItemC.aStyleClass}"
+                                                                      iStyleClass="#{menuItemC.iStyleClass}"
+                                                                      searchString="#{menuItemC.searchString}"></ssc:formItem>
+                                                        <ul class="nav nav-fifth-level collapse">
+                                                            <!-- fifth level -->
+                                                            <ui:repeat value="#{menuItemC.children}"
+                                                                       var="menuItemD">
+                                                                <li class="#{menuItemD.liStyleClass}">
+                                                                    <ssc:formItem
+                                                                            mdrId="#{menuItemD.mdrId}"
+                                                                            designation="#{menuItemD.designation}"
+                                                                            definition="#{menuItemD.definition}"
+                                                                            enumElementType="#{menuItemD.enumElementType}"
+                                                                            aStyleClass="#{menuItemD.aStyleClass}"
+                                                                            iStyleClass="#{menuItemD.iStyleClass}"
+                                                                            searchString="#{menuItemD.searchString}"></ssc:formItem>
+                                                                    <ul class="nav nav-sixth-level collapse">
+                                                                        <!-- fifth level -->
+                                                                        <ui:repeat
+                                                                                value="#{menuItemD.children}"
+                                                                                var="menuItemE">
+                                                                            <li class="#{menuItemE.liStyleClass}">
+                                                                                <ssc:formItem
+                                                                                        mdrId="#{menuItemE.mdrId}"
+                                                                                        designation="#{menuItemE.designation}"
+                                                                                        definition="#{menuItemE.definition}"
+                                                                                        enumElementType="#{menuItemE.enumElementType}"
+                                                                                        aStyleClass="#{menuItemE.aStyleClass}"
+                                                                                        iStyleClass="#{menuItemE.iStyleClass}"
+                                                                                        searchString="#{menuItemE.searchString}"/>
+                                                                            </li>
+                                                                        </ui:repeat>
+                                                                    </ul>
+                                                                </li>
+                                                            </ui:repeat>
+                                                        </ul>
+                                                    </li>
+                                                </ui:repeat>
+                                            </ul>
+                                        </li>
+                                    </ui:repeat>
+                                </ul>
+                            </li>
+                        </ui:repeat>
+                    </ul>
+                    <h:outputScript name="js/multiLevelMenu.js"/>
+                </h:panelGroup>
+
+                <h:panelGroup layout="block" binding="#{ItemSearchController.itemFilterPanel}"
+                              styleClass="hidden">
+                    <h:commandLink action="#{ItemSearchController.onClearSearch()}"
+                                   styleClass="btn btn-default btn-sm" type="button"
+                                   style="margin-bottom: 5px;"
+                                   onclick="$('#pleaseWait').modal('show');">
+                        <f:ajax execute="@this" render="@none" onevent="function(data) {
+                        if (data.status === 'complete') { 
+                            $('#pleaseWait').modal('hide'); 
+                        } 
+                    }"/>
+                        <i class="fa fa-times marginRight5"> </i> #{cc.resourceBundleMap.clearSearch}
+                    </h:commandLink>
+
+                    <ui:repeat value="#{ItemSearchController.getSearchedMenuItems()}" var="item">
+                        <li class="#{item.liStyleClass}" style="list-style: none;"><ssc:formItem
+                                mdrId="#{item.mdrId}" designation="#{item.designation}"
+                                definition="#{item.definition}"
+                                enumElementType="#{item.enumElementType}"
+                                aStyleClass="#{item.aStyleClass}"
+                                iStyleClass="#{item.iStyleClass}"></ssc:formItem></li>
+                    </ui:repeat>
+                </h:panelGroup>
+
+                <!-- executed on panel refresh -->
+                <h:outputScript name="js/itemSearch.js"/>
+            </h:panelGroup>
+
+            <h:commandLink action="#{ItemSearchController.onMdrItemsRefresh}"
+                           binding="#{ItemSearchController.refreshButton}"
+                           styleClass="btn btn-primary buttonMargin"
+                           style="margin-top:10px;"
+                           title="#{cc.resourceBundleMap.refreshItems}"
+                           onclick="$('#pleaseWait').modal('show');">
+                <f:ajax execute="@this" render="@form"
+                        onevent="function(data) {
+                        if (data.status === 'complete') { 
+                            $('#pleaseWait').modal('hide'); 
+                        } 
+                    }"/>
+                <i class="fa fa-refresh"/>
+            </h:commandLink>
+
+        </h:form>
+
+    </cc:implementation>
+
+</ui:composition>

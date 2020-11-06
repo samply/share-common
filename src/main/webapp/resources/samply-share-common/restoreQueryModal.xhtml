@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:cc="http://xmlns.jcp.org/jsf/composite">
+
+    <cc:interface>
+    </cc:interface>
+
+    <cc:implementation>
+
+        <div>
+            <h:form prependId="false">
+                <div class="modal fade" id="restoreQueryModal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">#{msg.restoreQuery}</h4>
+                            </div>
+                            <div class="modal-body">
+                                <i class="fa fa-info fa-3x pull-left"/>
+                                <p>#{msg.restoreQueryExplain}</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal"
+                                        onclick="dismissValues();">#{msg.restoreQueryDismiss}</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal"
+                                        onclick="submitLocallyStoredValues();deleteValuesFromLocalStorage();">
+                                    <!-- restore locally stored values on server and remove values from local storeage -->
+                                    #{msg.restoreQueryGo}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </h:form>
+        </div>
+
+        <h:outputScript name="queryRestoration.js" library="js" target="head"/>
+
+        <h:outputScript target="head">
+            $(document).ready(function () {
+                if (valuesInLocalStorage()) {
+                    moveValuesFromLocalStorageToDom();
+                    $('#restoreQueryModal').modal({keyboard: false, backdrop: false});
+                }
+            });
+        </h:outputScript>
+    </cc:implementation>
+
+</ui:composition>

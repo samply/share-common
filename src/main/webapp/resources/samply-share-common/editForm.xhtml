@@ -1,0 +1,171 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+                xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+                xmlns:o="http://omnifaces.org/ui"
+                xmlns:mf="http://xmlns.jcp.org/jsf/composite/mdrfaces">
+
+    <cc:interface>
+    </cc:interface>
+
+    <cc:implementation>
+        <!-- binding="#{SearchController.sortableItemPanel}" -->
+        <h:panelGroup id="sortableItemPanel" class="sortableItemPanel droptrue col-xs-12"
+                      layout="block">
+            <o:tree value="#{SearchController.queryTree}" var="item" varNode="node">
+                <o:treeNode>
+                    <o:treeNodeItem rendered="#{item.mdrId.compareTo('conjunctionGroup') != 0}">
+                        <h:panelGroup layout="block" styleClass="formItem row vertical-center">
+                            <input type="hidden" id="tempId" value="#{item.tempId}"></input>
+                            <input type="hidden" id="mdrId" value="#{item.mdrId}"></input>
+                            <input type="hidden" id="componentId"
+                                   value="#{component.clientId}"></input>
+
+                            <div class="col-xs-11">
+                                <div class="row">
+                                    <h:panelGroup layout="block">
+                                        <!-- MDR data element -->
+                                        <div class="col-lg-4 col-md-6 mdrItemLabel">
+                                            <mf:formMdrField mdrId="#{item.mdrId}"
+                                                             includeInput="false"
+                                                             includeLabel="true"/>
+                                        </div>
+
+                                        <div class="col-lg-3 col-md-6 mdrItemOperator">
+                                            <h:selectOneMenu
+                                                    styleClass="form-control hasTooltip operatorSelect"
+                                                    value="#{item.operator}">
+                                                <f:ajax execute="@form" render="@form"/>
+                                                <f:selectItems
+                                                        value="#{SearchController.getOperatorList(item.mdrId)}"
+                                                        var="op" itemLabel="#{msg[op]}"
+                                                        itemValue="#{op}"></f:selectItems>
+                                            </h:selectOneMenu>
+                                        </div>
+
+                                        <h:panelGroup layout="block" styleClass="values"
+                                                      style="#{fn:endsWith(item.operator.name, 'null') ? 'display: none;' : ''}">
+                                            <h:panelGroup layout="block" styleClass="valuesSingle"
+                                                          style="#{'BETWEEN'.equalsIgnoreCase(item.operator.name) ? 'display: none;' : ''}"
+                                                          rendered="#{!('BETWEEN'.equalsIgnoreCase(item.operator.name))}">
+                                                <div class="col-lg-4 col-md-12 mdrItemValue">
+                                                    <mf:formMdrField mdrId="#{item.mdrId}"
+                                                                     value="#{item.value}"
+                                                                     includeInput="true"
+                                                                     includeLabel="false"/>
+                                                </div>
+                                            </h:panelGroup>
+
+                                            <h:panelGroup layout="block" styleClass="valuesBetween"
+                                                          style="#{'BETWEEN'.equalsIgnoreCase(item.operator.name) ? '' : 'display: none;'}"
+                                                          rendered="#{'BETWEEN'.equalsIgnoreCase(item.operator.name)}">
+                                                <div class="col-lg-2 col-md-6 mdrItemValue mdrItemValueFrom">
+                                                    <mf:formMdrField mdrId="#{item.mdrId}"
+                                                                     value="#{item.lowerBound}"
+                                                                     includeInput="true"
+                                                                     includeLabel="false"/>
+                                                </div>
+                                                <div class="col-lg-2 col-md-6 mdrItemValue mdrItemValueTo">
+                                                    <mf:formMdrField mdrId="#{item.mdrId}"
+                                                                     value="#{item.upperBound}"
+                                                                     includeInput="true"
+                                                                     includeLabel="false"/>
+                                                </div>
+                                            </h:panelGroup>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+                                </div>
+                            </div>
+                            <div class="col-xs-1" style="text-align: right; padding-left: 0;">
+                                <h:commandLink value="" action="#{SearchController.clone(node)}"
+                                               styleClass="btn btn-default">
+                                    <i class="fa fa-copy"></i>
+                                    <f:ajax execute="@form" render="@form"/>
+                                </h:commandLink>
+                                <h:commandLink value="" action="#{SearchController.remove(node)}"
+                                               styleClass="btn btn-default">
+                                    <i class="fa fa-trash-o text-warning"></i>
+                                    <f:ajax execute="@form" render="@form"/>
+                                </h:commandLink>
+                            </div>
+
+                        </h:panelGroup>
+                        <o:treeInsertChildren/>
+                    </o:treeNodeItem>
+                    <o:treeNodeItem rendered="#{item.mdrId.compareTo('conjunctionGroup') == 0}">
+                        <h:panelGroup layout="block"
+                                      styleClass="formItem row vertical-center conjunctionGroupItem">
+                            <input type="hidden" id="tempId" value="#{item.tempId}"></input>
+                            <input type="hidden" id="mdrId" value="#{item.mdrId}"></input>
+                            <input type="hidden" id="componentId"
+                                   value="#{component.clientId}"></input>
+
+                            <div class="col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-11">
+                                        <div class="row conjunctionGroup">
+                                            <div class="col-xs-6 col-md-5 col-lg-3">
+                                                <h:selectOneMenu styleClass="form-control"
+                                                                 value="#{item.conjunction}">
+                                                    <f:selectItem itemLabel="AND" itemValue="AND"/>
+                                                    <f:selectItem itemLabel="OR" itemValue="OR"/>
+                                                </h:selectOneMenu>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-1"
+                                         style="text-align: right; padding-left: 0;">
+                                        <h:commandLink value=""
+                                                       action="#{SearchController.remove(node)}"
+                                                       styleClass="btn btn-default btnRemove"
+                                                       rendered="#{!item.root}"
+                                                       onclick="$('.saved').hide();">
+                                            <i class="fa fa-trash-o text-warning"></i>
+                                            <f:ajax execute="@form" render="@form"/>
+                                        </h:commandLink>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <h:panelGroup layout="block" style="min-height: 50px;">
+                                            <div class="groupContent">
+                                                <o:treeInsertChildren/>
+                                            </div>
+                                        </h:panelGroup>
+                                    </div>
+                                </div>
+                            </div>
+                        </h:panelGroup>
+                    </o:treeNodeItem>
+                </o:treeNode>
+            </o:tree>
+
+            <h:panelGroup styleClass="dragInfo" id="dragInfo" layout="block"
+                          style="#{(SearchController.queryTree.childCount > 0) ? 'display:none' : ''}">
+                <div style="font-size: 30px;">
+                    <i class="fa fa-hand-o-up"></i> <br/> Kriterium hinzufügen
+                </div>
+                <div>Aus der Liste rechts hinzufügen</div>
+            </h:panelGroup>
+
+            <!-- executed on panel refresh -->
+            <h:outputScript>makePanelsDroppable();</h:outputScript>
+
+        </h:panelGroup>
+
+
+        <o:commandScript name="addItemToQueryRoot" action="#{SearchController.addItemToQueryRoot}"
+                         render="sortableItemPanel"
+                         oncomplete="$('#dragInfo').hide();"
+                         execute="sortableItemPanel"></o:commandScript>
+        <o:commandScript name="addItemToQueryGroup" action="#{SearchController.addItemToQueryGroup}"
+                         render="sortableItemPanel"
+                         oncomplete="$('#dragInfo').hide();"
+                         execute="sortableItemPanel"></o:commandScript>
+        <o:commandScript name="updateQuery" render="sortableItemPanel" execute="sortableItemPanel"
+                         onbegin="console.log('update query!');"/>
+
+    </cc:implementation>
+</ui:composition>

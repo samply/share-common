@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+                xmlns:o="http://omnifaces.org/ui">
+
+    <cc:interface>
+    </cc:interface>
+
+    <cc:implementation>
+        <h:outputScript name="js/sessionTimeout.js" target="head"/>
+        <div>
+            <h:form prependId="false">
+                <div class="modal fade" id="timeoutSession" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title"
+                                    id="myModalLabel">#{msg.session_runs_out}</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>
+                                    <i class="fa fa-warning fa-3x pull-left"/>
+                                    <span style="font-size: 150%;">
+                                    <span id="dialog-countdown" style="font-weight: bold"/>
+                                </span>
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <p>#{msg.session_runs_out_explain}</p>
+                                <!--                             <h:commandButton value="#{msg.session_freshup}" data-dismiss="modal" styleClass="btn btn-primary" onclick="keepAlive()" /> -->
+                                <button type="button" data-dismiss="modal" class="btn btn-primary"
+                                        onclick="resetTimer();keepAlive();">#{msg.session_freshup}</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <o:commandScript name="keepAlive"
+                                 action="#{facesContext.externalContext.getSession(false)}"
+                                 render="@form"/>
+            </h:form>
+        </div>
+    </cc:implementation>
+
+</ui:composition>

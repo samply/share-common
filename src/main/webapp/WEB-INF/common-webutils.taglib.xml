@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<facelet-taglib xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  version="2.0"
+  xmlns="http://java.sun.com/xml/ns/javaee"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd">
+
+  <function>
+    <function-class>de.samply.share.common.utils.WebUtils</function-class>
+    <function-name>getVersionOfDataelement</function-name>
+    <function-signature>java.lang.String getVersionOfDataelement(java.lang.String)
+    </function-signature>
+  </function>
+
+  <function>
+    <function-class>de.samply.share.common.utils.WebUtils</function-class>
+    <function-name>getMdrIdDatatype</function-name>
+    <function-signature>de.samply.share.common.utils.MdrIdDatatype
+      getMdrIdDatatype(java.lang.String)
+    </function-signature>
+  </function>
+
+  <namespace>http://share.samply.de/common-webutils</namespace>
+
+</facelet-taglib>

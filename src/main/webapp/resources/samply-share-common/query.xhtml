@@ -1,0 +1,112 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:o="http://omnifaces.org/ui"
+                xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+                xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+                xmlns:mf="http://xmlns.jcp.org/jsf/composite/mdrfaces">
+
+    <cc:interface>
+        <cc:attribute name="queryTree" class="org.omnifaces.model.tree.TreeModel"/>
+    </cc:interface>
+
+    <cc:implementation>
+        <h:outputStylesheet name="css/queryBuilder.css"/>
+        <div class="disabledCriteriaDiv">
+            <o:tree value="#{cc.attrs.queryTree}" var="item" varNode="node">
+                <o:treeNode>
+                    <o:treeNodeItem rendered="#{item.mdrId.compareTo('conjunctionGroup') != 0}">
+                        <h:panelGroup layout="block" styleClass="formItem row vertical-center">
+                            <div class="col-xs-12">
+                                <div class="row">
+                                    <h:panelGroup layout="block">
+                                        <div class="col-xs-4 mdrItemLabel">
+                                            <mf:formMdrField mdrId="#{item.mdrId}"
+                                                             includeInput="false"
+                                                             includeLabel="true"/>
+                                        </div>
+
+                                        <div class="col-xs-2 mdrItemOperator">
+                                            <h:selectOneMenu
+                                                    styleClass="form-control hasTooltip operatorSelect"
+                                                    value="#{item.operator}"
+                                                    disabled="true">
+                                                <f:selectItems
+                                                        value="#{SearchController.operatorList}"
+                                                        var="op" itemLabel="#{msg[op]}"
+                                                        itemValue="#{op}"></f:selectItems>
+                                            </h:selectOneMenu>
+                                        </div>
+
+                                        <h:panelGroup layout="block" styleClass="values"
+                                                      rendered="#{!fn:endsWith(item.operator.name, 'null')}">
+                                            <h:panelGroup layout="block" styleClass="valuesSingle"
+                                                          rendered="#{!('BETWEEN'.equalsIgnoreCase(item.operator.name))}">
+                                                <div class="col-xs-6 mdrItemValue">
+                                                    <mf:formMdrField mdrId="#{item.mdrId}"
+                                                                     value="#{item.value}"
+                                                                     includeInput="true"
+                                                                     includeLabel="false"/>
+                                                </div>
+                                            </h:panelGroup>
+
+                                            <h:panelGroup layout="block" styleClass="valuesBetween"
+                                                          rendered="#{'BETWEEN'.equalsIgnoreCase(item.operator.name)}">
+                                                <div class="col-xs-3 mdrItemValue mdrItemValueFrom">
+                                                    <mf:formMdrField mdrId="#{item.mdrId}"
+                                                                     value="#{item.lowerBound}"
+                                                                     includeInput="true"
+                                                                     includeLabel="false"/>
+                                                </div>
+                                                <div class="col-xs-3 mdrItemValue mdrItemValueTo">
+                                                    <mf:formMdrField mdrId="#{item.mdrId}"
+                                                                     value="#{item.upperBound}"
+                                                                     includeInput="true"
+                                                                     includeLabel="false"/>
+                                                </div>
+                                            </h:panelGroup>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+                                </div>
+                            </div>
+                        </h:panelGroup>
+                        <o:treeInsertChildren/>
+                    </o:treeNodeItem>
+                    <o:treeNodeItem rendered="#{item.mdrId.compareTo('conjunctionGroup') == 0}">
+                        <h:panelGroup layout="block"
+                                      styleClass="formItem row vertical-center conjunctionGroupItem">
+                            <div class="col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-11">
+                                        <div class="row conjunctionGroup">
+                                            <div class="col-xs-2">
+                                                <h:selectOneMenu styleClass="form-control"
+                                                                 value="#{item.conjunction}">
+                                                    <f:selectItem itemLabel="AND" itemValue="AND"/>
+                                                    <f:selectItem itemLabel="OR" itemValue="OR"/>
+                                                </h:selectOneMenu>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <h:panelGroup layout="block" style="min-height: 50px;">
+                                            <div class="groupContent">
+                                                <o:treeInsertChildren/>
+                                            </div>
+                                        </h:panelGroup>
+                                    </div>
+                                </div>
+                            </div>
+                        </h:panelGroup>
+                    </o:treeNodeItem>
+                </o:treeNode>
+            </o:tree>
+        </div>
+        <script>
+          $('.disabledCriteriaDiv :input').prop('disabled', true);
+        </script>
+    </cc:implementation>
+</ui:composition>
