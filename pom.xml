@@ -9,7 +9,7 @@
     </parent>
 
     <artifactId>share-common</artifactId>
-    <version>4.0.1-SNAPSHOT</version>
+    <version>4.0.1</version>
 
     <name>Samnply Share Common</name>
     <description>Samply Share Common Components</description>
