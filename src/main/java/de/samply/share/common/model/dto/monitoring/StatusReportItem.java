@@ -1,5 +1,7 @@
 package de.samply.share.common.model.dto.monitoring;
 
+import com.google.gson.annotations.SerializedName;
+
 public class StatusReportItem {
 
   public static final String PARAMETER_LDM_STATUS = "bridgehead-ldm";
@@ -20,8 +22,11 @@ public class StatusReportItem {
   public static final String PARAMETER_JOB_CONFIG = "job-config";
   public static final String PARAMETER_INQUIRY_INFO = "inquiry-info";
 
+  @SerializedName(value = "parameter_name")
   private String parameterName;
+  @SerializedName(value = "status_text")
   private String statusText;
+  @SerializedName(value = "exit_status")
   private String exitStatus;
 
   public String getParameterName() {
