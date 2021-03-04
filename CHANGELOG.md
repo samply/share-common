@@ -4,9 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.1.0 - 2021-03-03]
+### Added
+- broker constant url for getting site names
+
 ## [4.0.1 - 2021-02-25]
 ### Fixed
-variable names for icinga
+- variable names for icinga
 
 ## [4.0.0 - 2020-11-06]
 - Github release
