@@ -9,6 +9,8 @@ public class Constants {
   public static final String AUTH_HEADER_VALUE_REGISTRATION = "SamplyRegistration";
   public static final String AUTH_HEADER_VALUE_SAMPLY = "Samply";
   public static final String BANKS_PATH = "rest/searchbroker/banks/";
+  public static final String SITES_PATH = "rest/searchbroker/sites/";
+  public static final String SITES_NAME_PATH = "rest/searchbroker/siteNames/";
   public static final String CONTACT_PATH = "contact";
   public static final String EXPOSE_CHECK_PATH = "hasexpose";
   public static final String EXPOSE_UNAVAILABLE = "unavailable";
