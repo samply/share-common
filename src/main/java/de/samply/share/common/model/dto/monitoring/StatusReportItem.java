@@ -1,5 +1,6 @@
 package de.samply.share.common.model.dto.monitoring;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 
 public class StatusReportItem {
@@ -22,10 +23,13 @@ public class StatusReportItem {
   public static final String PARAMETER_JOB_CONFIG = "job-config";
   public static final String PARAMETER_INQUIRY_INFO = "inquiry-info";
 
+  @JsonProperty("parameter_name")
   @SerializedName(value = "parameter_name")
   private String parameterName;
+  @JsonProperty("status_text")
   @SerializedName(value = "status_text")
   private String statusText;
+  @JsonProperty("exit_status")
   @SerializedName(value = "exit_status")
   private String exitStatus;
 
