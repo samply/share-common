@@ -9,9 +9,9 @@
     </parent>
 
     <artifactId>share-common</artifactId>
-    <version>4.3.0</version>
+    <version>4.3.1-SNAPSHOT</version>
 
-    <name>Samnply Share Common</name>
+    <name>Samply Share Common</name>
     <description>Samply Share Common Components</description>
     <url>https://github.com/samply/share-common</url>
     <organization>
