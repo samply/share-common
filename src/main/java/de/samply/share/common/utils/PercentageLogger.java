@@ -2,7 +2,7 @@ package de.samply.share.common.utils;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
 
 /**
  * <p>PercentageLogger is intended to log the progress of another process, that consists of
