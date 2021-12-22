@@ -1,5 +1,3 @@
-UNMERGED BRANCH -CHANGES FROM OTHER SAMPLY TEAMS MISSING
-
  ## License
         
  Copyright 2020 The Samply Development Community
