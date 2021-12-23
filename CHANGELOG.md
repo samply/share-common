@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.4.0 - 2021-12-15]
+### Changed
+- Auth dto to 5.2.0
+
 ## [4.3.0 - 2021-07-29]
 ### Added
 - added JsonProperty to StatusReportItem
