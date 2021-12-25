@@ -54,7 +54,7 @@
 
         <version.samply.common.config>5.1.0</version.samply.common.config>
         <mdrfaces.version>4.0.0</mdrfaces.version>
-        <auth-dto.version>5.1.0</auth-dto.version>
+        <auth-dto.version>5.2.0</auth-dto.version>
         <share-dto.version>5.0.0</share-dto.version>
 
         <!-- general dependencies -->
