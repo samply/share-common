@@ -20,6 +20,7 @@ public class StatusReportItem {
       PARAMETER_PATIENTS_DKTKFLAGGED_COUNT = "bridgehead-patients-dktkflagged";
   public static final String PARAMETER_CENTRAXX_MAPPING_VERSION = "centraxx-mapping-version";
   public static final String PARAMETER_CENTRAXX_MAPPING_DATE = "centraxx-mapping-date";
+  public static final String PARAMETER_LDM_CERTIFICATE_DATE = "ldm-certificate-date";
   public static final String PARAMETER_JOB_CONFIG = "job-config";
   public static final String PARAMETER_INQUIRY_INFO = "inquiry-info";
 
