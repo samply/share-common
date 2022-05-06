@@ -16,7 +16,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-import javax.annotation.PostConstruct;
 import javax.faces.component.html.HtmlPanelGroup;
 import javax.faces.context.FacesContext;
 import javax.xml.bind.JAXBException;
@@ -100,7 +99,6 @@ public abstract class AbstractSearchController implements Serializable {
   /**
    * Restores query tree if the serialized query is not empty.
    */
-  @PostConstruct
   public void init() {
     String serializedQuery = getSerializedQuery();
     if (getSerializedQuery() != null && !serializedQuery.isEmpty()) {
