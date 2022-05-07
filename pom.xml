@@ -59,7 +59,7 @@
 
         <!-- general dependencies -->
         <omnifaces.version>1.14.1</omnifaces.version>
-        <joda-time.version>2.9.9</joda-time.version>
+        <joda-time.version>2.10.13</joda-time.version>
         <httpclient.version>4.5.5</httpclient.version>
 
         <!-- webjars -->
